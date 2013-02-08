@@ -21,22 +21,22 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-module RestfulApiAuthentication
+module SecureApiAuthentication
   class Railtie < Rails::Railtie
     initializer "restful_api_authentication_railtie.config_initializer" do
-      RestfulApiAuthentication::Checker.time_window      = 4
-      RestfulApiAuthentication::Checker.header_timestamp = 'x-timestamp'
-      RestfulApiAuthentication::Checker.header_signature = 'x-signature'
-      RestfulApiAuthentication::Checker.header_api_key   = 'x-api-key'
-      RestfulApiAuthentication::Checker.verbose_errors   = false
+      SecureApiAuthentication::Checker.time_window      = 4
+      SecureApiAuthentication::Checker.header_timestamp = 'x-timestamp'
+      SecureApiAuthentication::Checker.header_signature = 'x-signature'
+      SecureApiAuthentication::Checker.header_api_key   = 'x-api-key'
+      SecureApiAuthentication::Checker.verbose_errors   = false
       if File.exists? Rails.root.join('config', 'restful_api_authentication.yml')
         begin
           config_data = YAML::load_file(Rails.root.join('config', 'restful_api_authentication.yml'))[Rails.env]
-          RestfulApiAuthentication::Checker.time_window      = config_data['request_window'].to_i unless config_data['request_window'].nil?
-          RestfulApiAuthentication::Checker.header_timestamp = config_data['header_names']['timestamp'] unless config_data['header_names'].nil? or config_data['header_names']['timestamp'].nil?
-          RestfulApiAuthentication::Checker.header_signature = config_data['header_names']['signature'] unless config_data['header_names'].nil? or config_data['header_names']['signature'].nil?
-          RestfulApiAuthentication::Checker.header_api_key   = config_data['header_names']['api_key'] unless config_data['header_names'].nil? or config_data['header_names']['api_key'].nil?
-          RestfulApiAuthentication::Checker.verbose_errors   = config_data['verbose_errors'] unless config_data['verbose_errors'].nil?
+          SecureApiAuthentication::Checker.time_window      = config_data['request_window'].to_i unless config_data['request_window'].nil?
+          SecureApiAuthentication::Checker.header_timestamp = config_data['header_names']['timestamp'] unless config_data['header_names'].nil? or config_data['header_names']['timestamp'].nil?
+          SecureApiAuthentication::Checker.header_signature = config_data['header_names']['signature'] unless config_data['header_names'].nil? or config_data['header_names']['signature'].nil?
+          SecureApiAuthentication::Checker.header_api_key   = config_data['header_names']['api_key'] unless config_data['header_names'].nil? or config_data['header_names']['api_key'].nil?
+          SecureApiAuthentication::Checker.verbose_errors   = config_data['verbose_errors'] unless config_data['verbose_errors'].nil?
         rescue Exception => e
           # do nothing here -- we already have set the defaults
           Rails.logger.debug e.message

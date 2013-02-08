@@ -23,12 +23,12 @@
 
 require 'rails/generators/migration'
 
-module RestfulApiAuthentication
+module SecureApiAuthentication
   module Generators
     class InstallGenerator < ::Rails::Generators::Base
       include Rails::Generators::Migration
       source_root File.expand_path('../templates', __FILE__)
-      desc "This generator installs a restful_api_authentication.yml file, creates a RestClient model, and generates migrations for the RestfulApiAuthentication gem."
+      desc "This generator installs a secure_api_authentication.yml file, creates a SecureApiClient model, and generates migrations for the SecureApiAuthentication gem."
       
       def self.next_migration_number(path)
         unless @prev_migration_nr
@@ -40,15 +40,15 @@ module RestfulApiAuthentication
       end
       
       def copy_migrations
-        migration_template "create_rest_client.rb", "db/migrate/create_rest_client.rb"
+        migration_template "create_secure_api_client.rb", "db/migrate/create_secure_api_client.rb"
       end
       
       def copy_the_config_file
-        copy_file "restful_api_authentication.yml", "config/restful_api_authentication.yml"
+        copy_file "secure_api_authentication.yml", "config/secure_api_authentication.yml"
       end
       
-      def copy_the_rest_client_model
-        copy_file "rest_client.rb", "app/models/rest_client.rb"
+      def copy_the_secure_api_client_model
+        copy_file "secure_client.rb", "app/models/secure_api_client.rb"
       end
       
     end

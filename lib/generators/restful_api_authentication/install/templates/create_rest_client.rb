@@ -1,6 +1,6 @@
-class CreateRestClient < ActiveRecord::Migration
+class CreateSecureApiClient < ActiveRecord::Migration
   def change
-    create_table :rest_clients do |t|
+    create_table :secure_api_clients do |t|
       t.string :name
       t.text :description
       t.string :api_key

@@ -1,4 +1,4 @@
-class CreateRestClient < ActiveRecord::Migration
+class CreateSecureApiClient < ActiveRecord::Migration
   def change
     create_table :rest_clients do |t|
       t.string :name

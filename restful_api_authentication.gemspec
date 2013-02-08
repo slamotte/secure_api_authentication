@@ -15,7 +15,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.name          = "restful_api_authentication"
   gem.require_paths = ["lib"]
-  gem.version       = RestfulApiAuthentication::VERSION
+  gem.version       = SecureApiAuthentication::VERSION
 
   gem.add_runtime_dependency(%q<rails>, [">= 3.2.0"])
   gem.add_runtime_dependency(%q<uuid>, [">= 2.3.5"])

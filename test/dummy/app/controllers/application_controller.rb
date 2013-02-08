@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  include RestfulApiAuthentication
+  include SecureApiAuthentication
   respond_to :json, :xml
   before_filter :set_default_format, :authenticated?
   

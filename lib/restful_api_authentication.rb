@@ -29,15 +29,15 @@ require File.expand_path('../restful_api_authentication/version.rb', __FILE__)
 require File.expand_path('../restful_api_authentication/checker.rb', __FILE__)
 require File.expand_path('../restful_api_authentication/railtie.rb', __FILE__)
 
-module RestfulApiAuthentication
+module SecureApiAuthentication
 
   # This method should be used as a Rails before_filter in any controller in which one wants to ensure requests have valid client authentication headers.
   #
   # If the request is not authenticated, it will use the rails respond_with method to send a 401 Unauthorized response.
   def authenticated?
-    checker = RestfulApiAuthentication::Checker.new(request.headers, request.fullpath)
+    checker = SecureApiAuthentication::Checker.new(request.headers, request.fullpath)
     if checker.authorized?
-      return true
+      true
     else
       if checker.verbose_errors
         respond_with(checker.errors, :status => 401, :location => nil)
@@ -49,13 +49,13 @@ module RestfulApiAuthentication
 
   # This method should be used as a Rails before_filter in any controller in which one wants to ensure requests have valid client authentication headers and are considered master applications.
   #
-  # In order to be authenticated, not only do the headers need to be valid but the is_master flag must be true in the associated RestClient model.
+  # In order to be authenticated, not only do the headers need to be valid but the is_master flag must be true in the associated SecureApiClient model.
   #
   # Master accounts can be used for anything you like but are typically reserved for admin specific requests that should only be performed by a limited number of clients.
   def authenticated_master?
-    checker = RestfulApiAuthentication::Checker.new(request.headers, request.fullpath)
+    checker = SecureApiAuthentication::Checker.new(request.headers, request.fullpath)
     if checker.authorized?({:require_master => true})
-      return true
+      true
     else
       if checker.verbose_errors
         respond_with(checker.errors, :status => 401, :location => nil)

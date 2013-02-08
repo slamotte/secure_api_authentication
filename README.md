@@ -1,8 +1,8 @@
-# RestfulApiAuthentication
+# SecureApiAuthentication
 
-RestfulApiAuthentication is a gem which implements a standard api_key/secret authentication system for your Ruby on Rails RESTful web services.
+SecureApiAuthentication is a gem which implements a standard api_key/secret authentication system for your Ruby on Rails web services.
 
-With most RESTful Web API's, it is important to know which app is using your resources and that only the apps you allow access those resources. This gem allows you to easily add this layer of authentication to any Rails RESTful resource you want, and it even includes protection against various forms of attack.
+With most Web API's, it is important to know which app is using your resources and that only the apps you allow access those resources. This gem allows you to easily add this layer of authentication to any Rails resource you want, and it even includes protection against various forms of attack.
 
 Go here to read a more lengthy description of the problem this gem is attempting to solve: [Authentication of a Ruby on Rails RESTful Web API / Service](http://www.djkiger.com/?p=41)
 
@@ -39,16 +39,16 @@ Run the migration task:
 
     $ rake db:migrate
 
-Update the configuration (if you like) by editing the `config/restful_api_authentication.yml` file.
+Update the configuration (if you like) by editing the `config/secure_api_authentication.yml` file.
 
 ## Usage
 
 ### How It Works From A Client's Perspective
 
-Before anyone can use a resource which is protected using this gem, that person/app must have a valid API key and secret. These are generated and stored as a RestClient model in your app. The easiest way to generate this is to use the Rails console:
+Before anyone can use a resource which is protected using this gem, that person/app must have a valid API key and secret. These are generated and stored as a SecureApiClient model in your app. The easiest way to generate this is to use the Rails console:
 
 ```ruby
-new_app = RestClient.create(:name => "My New App", :description => "This is my new application that will access my RESTful API.")
+new_app = SecureApiClient.create(:name => "My New App", :description => "This is my new application that will access my API.")
 new_app.api_key
 new_app.secret
 ```
@@ -113,7 +113,7 @@ verbose_errors: true
 To require authentication for a specific resource (controller) of your RESTful web service, add this at the top of your controller just under where you open the controller class:
 
 ```ruby
-include RestfulApiAuthentication
+include SecureApiAuthentication
 respond_to :json, :xml
 before_filter :authenticated?
 ```
@@ -124,7 +124,7 @@ If the headers are not provided or the application fails to authenticate, your w
 
 ### Master Authentication
 
-Some web services might require an extra bit of security (creating new RestClients or managing User records). In these cases, you can require "master" authorization. Then, any RestClient with the is_master attribute set to true can use the resources but the others cannot.
+Some web services might require an extra bit of security (creating new SecureApiClients or managing User records). In these cases, you can require "master" authorization. Then, any SecureApiClient with the is_master attribute set to true can use the resources but the others cannot.
 
 Assuming you have authentication setup in your application controller, in the controller that requires master authentication:
 

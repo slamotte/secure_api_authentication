@@ -23,15 +23,15 @@
 
 module SecureApiAuthentication
   class Railtie < Rails::Railtie
-    initializer "restful_api_authentication_railtie.config_initializer" do
+    initializer "secure_api_authentication_railtie.config_initializer" do
       SecureApiAuthentication::Checker.time_window      = 4
       SecureApiAuthentication::Checker.header_timestamp = 'x-timestamp'
       SecureApiAuthentication::Checker.header_signature = 'x-signature'
       SecureApiAuthentication::Checker.header_api_key   = 'x-api-key'
       SecureApiAuthentication::Checker.verbose_errors   = false
-      if File.exists? Rails.root.join('config', 'restful_api_authentication.yml')
+      if File.exists? Rails.root.join('config', 'secure_api_authentication.yml')
         begin
-          config_data = YAML::load_file(Rails.root.join('config', 'restful_api_authentication.yml'))[Rails.env]
+          config_data = YAML::load_file(Rails.root.join('config', 'secure_api_authentication.yml'))[Rails.env]
           SecureApiAuthentication::Checker.time_window      = config_data['request_window'].to_i unless config_data['request_window'].nil?
           SecureApiAuthentication::Checker.header_timestamp = config_data['header_names']['timestamp'] unless config_data['header_names'].nil? or config_data['header_names']['timestamp'].nil?
           SecureApiAuthentication::Checker.header_signature = config_data['header_names']['signature'] unless config_data['header_names'].nil? or config_data['header_names']['signature'].nil?

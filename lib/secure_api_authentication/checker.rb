@@ -35,7 +35,7 @@ module SecureApiAuthentication
 
     # Checks if the current request passes authorization
     def authorized?(options = {})
-      raise "Configuration values not found. Please run rails g restful_api_authentication:install to generate a config file." if @@header_timestamp.nil? || @@header_signature.nil? || @@header_api_key.nil? || @@time_window.nil?
+      raise "Configuration values not found. Please run rails g secure_api_authentication:install to generate a config file." if @@header_timestamp.nil? || @@header_signature.nil? || @@header_api_key.nil? || @@time_window.nil?
       return_val = false
       if headers_have_values?
         if in_time_window?

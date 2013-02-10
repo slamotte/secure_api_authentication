@@ -48,7 +48,7 @@ module SecureApiAuthentication
       end
       
       def copy_the_secure_api_client_model
-        copy_file "secure_client.rb", "app/models/secure_api_client.rb"
+        copy_file "secure_api_client.rb", "app/models/secure_api_client.rb"
       end
       
     end

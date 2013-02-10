@@ -21,7 +21,7 @@ Go here to read a more lengthy description of the problem this gem is attempting
 
 Add this line to your application's Gemfile:
 
-    gem 'restful_api_authentication'
+    gem 'secure_api_authentication'
 
 And then execute:
 
@@ -29,11 +29,11 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install restful_api_authentication
+    $ gem install secure_api_authentication
 
 Run Rails generator:
 
-    $ rails g restful_api_authentication:install
+    $ rails g secure_api_authentication:install
 
 Run the migration task:
 
@@ -98,11 +98,11 @@ puts result.inspect
 
 ### Configuration
 
-In the `config/restful_api_authentication.yml` file you will find several things that you can change. The defaults are usually fine for most cases.
+In the `config/secure_api_authentication.yml` file you will find several things that you can change. The defaults are usually fine for most cases.
 
 #### Verbose Error Messages (>= 0.2.0)
 
-By default, the standard response to any authentication error is "not authorized". However, more meaningful explanations of why authentication is failing can be sent by adding the following to the `config/restful_api_authentication.yml` file:
+By default, the standard response to any authentication error is "not authorized". However, more meaningful explanations of why authentication is failing can be sent by adding the following to the `config/secure_api_authentication.yml` file:
 
 ```
 verbose_errors: true
@@ -110,7 +110,7 @@ verbose_errors: true
 
 ### Requiring Authentication
 
-To require authentication for a specific resource (controller) of your RESTful web service, add this at the top of your controller just under where you open the controller class:
+To require authentication for a specific resource (controller) of your web service, add this at the top of your controller just under where you open the controller class:
 
 ```ruby
 include SecureApiAuthentication

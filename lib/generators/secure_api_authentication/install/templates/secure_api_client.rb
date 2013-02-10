@@ -24,6 +24,14 @@ class SecureApiClient < ActiveRecord::Base
     self.secret = d.to_s
   end
   
+  def request_headers(url, timestamp=nil)
+    timestamp ||= Time.now.utc.strftime("%Y-%m-%d %H:%M:%S UTC")
+    sig_string = self.secret + url + timestamp
+    digest = Digest::SHA256.new << sig_string
+    signature = digest.to_s
+    { "x-api-key" => api_key, "x-timestamp" => timestamp, "x-signature" => signature}
+  end
+
   private
   
     def set_defaults

@@ -10,7 +10,7 @@
 
 ## Version 0.2.0
 
-* Added verbose error messaging; if this is enabled in the YML config file, then the response to an authentication failure will be more descriptive as to why the authentication failed. To enable, add `verbose_errors: true` to the `config/restful_api_authentication.yml`.
+* Added verbose error messaging; if this is enabled in the YML config file, then the response to an authentication failure will be more descriptive as to why the authentication failed. To enable, add `verbose_errors: true` to the `config/secure_api_authentication.yml`.
 
 ## Version 0.1.2
 

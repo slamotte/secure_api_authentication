@@ -1,13 +1,13 @@
 World(Rack::Test::Methods)
 
 Given /^I am authenticated$/ do
-  @rest_client = FactoryGirl.build(:rest_client)
-  @rest_client.is_master = false
-  header 'x-api-key', @rest_client.api_key
+  @secure_api_client = FactoryGirl.build(:secure_api_client)
+  @secure_api_client.is_master = false
+  header 'x-api-key', @secure_api_client.api_key
 end
 
 Given /^I have master permissions$/ do
-  @rest_client.is_master = true
+  @secure_api_client.is_master = true
 end
 
 Given /^an? "([^"]*)" exists$/ do |factory_name|
@@ -16,7 +16,7 @@ end
 
 # used to test authentication system
 When /^I perform an authentication test with "([^"]*)"$/ do |payload_type|
-  client = FactoryGirl.build(:rest_client)
+  client = FactoryGirl.build(:secure_api_client)
   ts = Time.now.utc
   request_uri = '/help/authentication'
   if payload_type == "old authentication data"
@@ -45,7 +45,7 @@ end
 
 ## Methods with parameters 
 When /^I perform a ([^"]*) to "([^\"]*)" with an? "([^\"]*)" as ([^"]*)$/ do |method, path, factory_name, format|
-  @rest_client.save unless @rest_client.nil?
+  @secure_api_client.save unless @secure_api_client.nil?
   replace_attributes path, factory_name
   add_authentication_headers path
   params = nil
@@ -74,7 +74,7 @@ end
 
 ## Methods with parameters 
 When /^I perform a GET to "([^\"]*)" as ([^"]*)$/ do |path, format|
-  @rest_client.save unless @rest_client.nil?
+  @secure_api_client.save unless @secure_api_client.nil?
   replace_attributes path, nil
   add_authentication_headers path
   params = nil
